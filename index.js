@@ -15,11 +15,13 @@ app.use("/api", userRoute);
 
 app.use(
 	cors({
-		origin: "https://nodebackend-silk.vercel.app",
+		origin: "*",
+		methods: ["GET", "POST", "DELETE"],
+		allowedHeaders: ["Content-Type", "Authorization"],
 	})
 );
 
-const PORT = process.env.PORT || 1313;
-app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
+const port = parseInt(process.env.PORT) || 8080;
+app.listen(port, () => {
+	console.log(`helloworld: listening on port ${port}`);
 });
