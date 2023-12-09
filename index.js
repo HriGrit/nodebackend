@@ -3,6 +3,13 @@ const cors = require("cors");
 
 const app = express();
 
+app.use(
+	cors({
+		origin: "*",
+		methods: ["GET", "POST", "DELETE"],
+	})
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -15,13 +22,6 @@ app.use("/api", userRoute);
 app.get("/", (req, res) => {
 	res.send("Hello World");
 });
-app.use(
-	cors({
-		origin: "*",
-		methods: ["GET", "POST", "DELETE"],
-		allowedHeaders: ["Content-Type", "Authorization"],
-	})
-);
 
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
