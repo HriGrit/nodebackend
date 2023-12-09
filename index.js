@@ -12,7 +12,9 @@ dbConnect();
 const userRoute = require("./routes/userRoutes");
 
 app.use("/api", userRoute);
-
+app.get("/", (req, res) => {
+	res.send("Hello World");
+});
 app.use(
 	cors({
 		origin: "*",
