@@ -5,8 +5,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: "*",
-		methods: ["GET", "POST", "DELETE"],
+		origin: "https://nodebackend-silk.vercel.app",
 	})
 );
 
