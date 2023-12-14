@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const sendEmail = require("../config/nodemailer");
+const generateToken = require("../utils/generateToken");
+const verifyToken = require("../utils/verifyToken");
 
 const createUserController = async (req, res) => {
 	const { name, email, password } = req.body;
@@ -34,7 +36,7 @@ const createUserController = async (req, res) => {
 		});
 
 		await newUser.save();
-
+		console.log(generateToken(newUser._id));
 		res.status(201).json({ message: "User created successfully" });
 	} catch (err) {
 		console.log(err);
@@ -60,7 +62,7 @@ const loginUserController = async (req, res) => {
 		if (!isMatch) {
 			return res.status(400).json({ message: "Invalid credentials" });
 		}
-
+		console.log(generateToken(user._id));
 		res.status(200).json({ message: "Logged in successfully" });
 	} catch (err) {
 		console.log(err);
@@ -95,7 +97,6 @@ const forgotUserController = async (req, res) => {
 		};
 
 		await sendEmail(object);
-
 		res.status(200).json({ message: "Token sent to email!" });
 	} catch (err) {
 		console.log(err);
